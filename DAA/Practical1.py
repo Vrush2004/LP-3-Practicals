@@ -1,3 +1,5 @@
+# Practical 1: Write a program to calculate Fibonacci numbers and find its step count.
+
 def fibonacci(n):
     step_count = 0
     if n == 0:
