@@ -33,3 +33,36 @@ def merge(arr, left, middle, right):
         arr[k] = R[j]
         j += 1
         k += 1
+
+# Merge sort function
+def merge_sort(arr, left, right):
+    if left < right:
+        middle = (left + right) // 2
+        merge_sort(arr, left, middle)
+        merge_sort(arr, middle + 1, right)
+        merge(arr, left, middle, right)
+
+# Timing single-threaded merge sort
+def time_merge_sort(arr):
+    start_time = time.time()
+    merge_sort(arr, 0, len(arr) - 1)
+    end_time = time.time()
+    return end_time - start_time
+
+
+# Multithreaded merge sort function
+def merge_sort_multithreaded(arr, left, right):
+    if left < right:
+        middle = (left + right) // 2
+        
+        # Create threads for both halves
+        left_thread = threading.Thread(target=merge_sort_multithreaded, args=(arr, left, middle))
+        right_thread = threading.Thread(target=merge_sort_multithreaded, args=(arr, middle + 1, right))
+        
+        left_thread.start()
+        right_thread.start()
+
+        left_thread.join()
+        right_thread.join()
+        
+        merge(arr, left, middle, right)
