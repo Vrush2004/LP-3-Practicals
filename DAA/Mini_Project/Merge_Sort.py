@@ -7,8 +7,6 @@ import threading
 def merge(arr, left, middle, right):
     n1 = middle - left + 1
     n2 = right - middle
-
-    # Create temp arrays
     L = arr[left:left + n1]
     R = arr[middle + 1:middle + 1 + n2]
 
@@ -23,12 +21,10 @@ def merge(arr, left, middle, right):
             arr[k] = R[j]
             j += 1
         k += 1
-
     while i < n1:
         arr[k] = L[i]
         i += 1
         k += 1
-
     while j < n2:
         arr[k] = R[j]
         j += 1
@@ -48,7 +44,6 @@ def time_merge_sort(arr):
     merge_sort(arr, 0, len(arr) - 1)
     end_time = time.time()
     return end_time - start_time
-
 
 # Multithreaded merge sort function
 def merge_sort_multithreaded(arr, left, right):
